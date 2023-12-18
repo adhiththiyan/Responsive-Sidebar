@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Optional: Include your own styles -->
+    <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital@1&family=Poppins:ital,wght@1,500&family=Roboto+Mono:ital@1&display=swap');
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #sidebar {
+            height: 100%;
+            max-width: 200px;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: lightskyblue;
+            padding-top: 20px;
+            color: grey;
+            z-index: 1000;
+            transition: 0.5s;
+            overflow-x: hidden;    
+    
+        }
+        #sidebar a {
+            color: black;
+        }
+        #sidebar a:hover {
+            color: lightseagreen;
+           
+        }
+        .table{
+            border: 2px solid black;
+        }
+        .table thead>tr>th {
+            background-color: lightseagreen;
+        }
+        #content {
+            margin-left: 200px;
+            padding: 20px;
+            transition: margin-left 0.5s;
+        }
+        
+
+        @media (max-width: 768px) {
+            #sidebar {
+                width: 100px;  
+            }
+            #sidebar h2{
+              font-size: 10px;
+            }
+            #sidebar ul li a{
+              font-size: 10px;
+            }
+            #content {
+                margin-left: 100px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+<!--Sidebar -->
+<div id="sidebar">
+    <h2 class="text-center">Side-bar</h2>
+    <ul class="nav flex-column text-center">
+        <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Groups</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+    </ul>
+</div>
+
+<!-- Content Area -->
+<div id="content">
+    <h1>Content </h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <!-- Create a canvas to  pie chart -->
+            <canvas id="chartjs-pie" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <!-- Section 2: Analytic Values -->
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body" style="border: 1px solid black;">
+          <h6 class="card-title">Total waste</h6>
+          <p class="card-text">100%</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body"  style="border: 1px solid black;">
+          <h6 class="card-title">E-waste</h6>
+          <p class="card-text">60%</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body"  style="border: 1px solid black;">
+          <h6 class="card-title">Others Waste</h6>
+          <p class="card-text">40%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <div class="row mt-4 table-responsive">
+    <div class="col-md-12 table-responsive">
+      <table class="table table-bordered ">
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">E-waste</th>
+            <th scope="col">percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Metals</td>
+            <td>35%</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>plastics</td>
+            <td>30%</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Glass</td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>Wood</td>
+            <td>5%</td>
+          </tr>
+          <tr>
+            <th scope="row">5</th>
+            <td>Others</td>
+            <td>10%</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    new Chart(document.getElementById("chartjs-pie"), {
+        type: "pie",
+        data: {
+            labels: ['Metals', 'plastics', 'Glass','Wood',"others"],
+            datasets: [{
+                data: [30, 35, 20, 5,10],
+                backgroundColor: ['lightskyblue', ' lightcoral', 'lightgreen','yellow','lightsalmon'],
+                borderColor: "transparent"
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            cutoutPercentage: 65,
+        }
+    });
+</script>
+
+
+</body>
+</html>
